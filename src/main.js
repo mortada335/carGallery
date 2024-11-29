@@ -12,7 +12,4 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(axios)
 app.use(router)
-
 app.mount('#app')
-
-

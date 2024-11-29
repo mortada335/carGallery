@@ -26,15 +26,28 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+/* Add this media query for mobile screens */
+@media (max-width: 600px) {
   body {
     display: flex;
     place-items: center;
+    flex-direction: column;
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem; /* Adjust padding for mobile */
   }
+
+  /* Adjust other styles for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5rem; /* Adjust font size for headings */
+  }
+
+  p {
+    font-size: 1rem; /* Adjust font size for paragraphs */
+  }
+
+  /* Add any other responsive styles for mobile here */
 }
