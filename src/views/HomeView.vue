@@ -18,7 +18,7 @@
         AUDI
       </h1>
       <div class="relative z-20">
-        <img loading="lazy" src="/src/assets/home.jpg" alt="Audi Car"
+        <img loading="lazy" src="/assets/images/home.jpg" alt="Audi Car"
           class="mx-auto w-3/4 max-w-4xl rounded-md shadow-lg">
       </div>
       <div class="mt-10 flex flex-wrap justify-center gap-4">
@@ -72,9 +72,11 @@
           <h3 class="text-xl font-bold text-gray-800">{{ car.model }}</h3>
           <p class="text-sm text-gray-600">{{ selectedCar.type }} | {{ selectedCar.year }} | {{ selectedCar.fuel }}</p>
           <p class="text-lg font-semibold text-gray-700 mt-2">${{ selectedCar.price }}</p>
-          <button class="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">
-            Order Now
-          </button>
+
+          <router-link :to="`/cars/` + id" class="outline-none text-white"> <button
+              class="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition">Show Details
+            </button>
+          </router-link>
         </div>
       </div>
       <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-10 mx-auto max-w-5xl">
@@ -143,7 +145,7 @@ const cars = ref([
     year: 2023,
     fuel: 'Petrol',
     price: 36620,
-    image: '/src/assets/1.jpg',
+    image: 'assets/images/1.jpg',
   },
   {
     id: 2,
@@ -152,7 +154,7 @@ const cars = ref([
     year: 2022,
     fuel: 'Electric',
     price: 88620,
-    image: 'src/assets/2.jpg',
+    image: 'assets/images/2.jpg',
   }, {
     id: 3,
     model: 'Audi Q7',
@@ -160,7 +162,7 @@ const cars = ref([
     year: 2021,
     fuel: "Electric",
     price: 120000,
-    image: 'src/assets/3.jpg',
+    image: 'assets/images/3.jpg',
 
   }
   // Add more cars as needed

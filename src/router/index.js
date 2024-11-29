@@ -17,7 +17,7 @@ const router = createRouter({
       component: BranchView
     },
     {
-      path: '/cars/',
+      path: '/cars/:id',
       name: 'car-details',
       component: CarDetailsView
     }
