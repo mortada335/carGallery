@@ -3,25 +3,30 @@ import HomeView from '../views/HomeView.vue'
 import BranchView from '../views/BranchView.vue'
 import CarDetailsView from '../views/CarDetailsView.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+const routes =  [
     {
       path: '/',
       name: 'home',
       component: HomeView
     },
     {
-      path: '/branch/',
+      path: '/branch/:id',
       name: 'branch',
-      component: BranchView
+      component: BranchView,
+      props:true
     },
     {
       path: '/cars/:id',
       name: 'car-details',
-      component: CarDetailsView
+      component: CarDetailsView,
+      props: true
     }
   ]
+
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
 })
 
 export default router
