@@ -79,7 +79,8 @@
                         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <!-- Car Image -->
                                 <div>
-                                        <img :src="car.image" alt="Car Details" class="w-full rounded-lg shadow-md" />
+                                        <img loading="lazy" :src="car.image" alt="Car Details"
+                                                class="w-full rounded-lg shadow-md" />
                                 </div>
 
                                 <!-- Car Info -->

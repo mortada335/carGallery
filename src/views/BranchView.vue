@@ -26,7 +26,7 @@
       <div class="max-w-7xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 card">
         <div v-for="(car, index) in cars" :key="index"
           class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-          <img :src="car.image" alt="Car" class="w-full h-48 object-cover" />
+          <img loading="lazy" :src="car.image" alt="Car" class="w-full h-48 object-cover" />
           <div class="p-6">
             <h3 class="text-xl font-bold text-gray-800">{{ car.name }}</h3>
             <p class="text-gray-600 text-sm">

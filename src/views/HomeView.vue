@@ -30,7 +30,7 @@
         <h2 class="text-3xl font-bold text-gray-800">Explore Our Cars</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 mt-10 justify-center gap-6">
           <div v-for="car in limitedCars" :key="car.id" class="p-6 bg-gray-50 shadow-md rounded-lg">
-            <img :src="car.image" alt="Car" class="w-full h-1/2 object-cover rounded-md mb-4">
+            <img loading="lazy" :src="car.image" alt="Car" class="w-full h-1/2 object-cover rounded-md mb-4">
             <h3 class="text-xl font-bold text-gray-800">{{ car.model }}</h3>
             <p class="text-sm text-gray-600">{{ car.type }} | {{ car.year }} | {{ car.fuel }}</p>
             <p class="text-lg font-semibold text-gray-700 mt-2">${{ car.price }}</p>
