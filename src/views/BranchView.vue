@@ -1,107 +1,91 @@
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white shadow-md py-6">
-      <div class="text-center">
-        <router-link to="/">
-          <h1 class="text-4xl font-bold text-gray-800">
-            CAR<span class="text-red-500">IN</span>
-          </h1>
-        </router-link>
+  <div>
+    <nav class="container mx-auto p-7 bg-white shadow-lg rounded-lg">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <div class="text-2xl font-bold w-42 ">
+          <a href="/" class="hover:text-white hover:bg-red-400 rounded text-gray-900 ">CAR<span
+              class="text-red-500">IN</span></a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="m-0 p-0 max-w-2xl w-full hidden sm:text-sm md:grid md:grid-cols-6">
+
+          <a href="/#hero" class="text-black hover:text-white hover:bg-red-500  text-center">
+            Home
+          </a> <a href="/#branches" class="text-black hover:text-white hover:bg-red-500  text-center">
+            Branches
+          </a>
+          <a href="/#explore" class="text-black hover:text-white hover:bg-red-500  text-center">
+            Explore
+          </a>
+
+          <a href="/#services" class="text-black hover:text-white hover:bg-red-500  text-center">
+            Services
+          </a>
+          <a href="/#testimonials" class="text-black hover:text-white hover:bg-red-500  text-center">
+            Testimonials
+          </a>
+
+          <a href="/#newsletter" class="text-black hover:text-white hover:bg-red-500 text-center">
+            Subscribe
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden flex items-center px-3 py-2 border rounded text-gray-700 border-gray-500 hover:text-red-500 hover:border-red-500"
+          @click="toggleMenu">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
+          </svg>
+        </button>
       </div>
+
+      <!-- Mobile Menu -->
+      <div v-if="menuOpen" class="md:hidden mt-4 space-y-4 text-center bg-gray-50 py-4 rounded-lg shadow-inner">
+        <a href="/#hero" class="block text-gray-700 hover:text-red-500">Home</a>
+        <a href="/#branches" class="block text-gray-700 hover:text-red-5a00">Branches</a>
+        <a href="/#explore" class="block text-gray-700 hover:text-red-500">Explore</a>
+        <a href="/#services" class="block text-gray-700 hover:text-red-500">Services</a>
+        <a href="/#testimonials" class="block text-gray-700 hover:text-red-500">Testimonials</a>
+        <a href="/#newsletter" class="block text-gray-700 hover:text-red-500">Subscribe</a>
+      </div>
+    </nav>
+    <!-- Header -->
+    <header class="bg-white shadow p-6 text-center">
+      <h1 class="text-4xl font-bold">
+        {{ branch.name }}
+      </h1>
+      <p class="text-gray-600">{{ branch.description }}</p>
     </header>
 
-    <!-- Branch Details -->
-    <section class="py-8 bg-white">
-      <div class="max-w-5xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-gray-800">Branch A</h2>
-        <p class="text-gray-600 mt-2 text-lg">
-          Discover the best cars available at our Branch A location.
-        </p>
-      </div>
-    </section>
-
-    <!-- Cars in Stock -->
-    <section class="py-10 bg-gray-50 ">
-      <div class="max-w-7xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 card">
-        <div v-for="(car, index) in cars" :key="index"
-          class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
-          <img loading="lazy" :src="car.image" alt="Car" class="w-full h-48 object-cover" />
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-800">{{ car.name }}</h3>
-            <p class="text-gray-600 text-sm">
-              {{ car.type }} | {{ car.year }} | {{ car.fuel }}
-            </p>
-            <p class="text-lg font-semibold text-gray-700 mt-4">
-              ${{ car.price }}
-            </p>
-            <router-link :to="`/cars/${car.id}`"
-              class="inline-block mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-              View Details
-            </router-link>
-          </div>
+    <!-- Cars in Branch -->
+    <section class="py-12 bg-gray-50">
+      <div v-if="filteredCars.length" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div v-for="car in filteredCars" :key="car.id" class="p-4 bg-white shadow-md rounded-lg">
+          <img :src="car.image" alt="Car" class="w-full h-40 object-cover rounded mb-4">
+          <h3 class="text-xl font-bold">{{ car.model }}</h3>
+          <p class="text-gray-600">{{ car.type }} | {{ car.year }}</p>
+          <router-link :to="`/cars/${car.id}`" class="block mt-4 text-center bg-red-500 text-white py-2 rounded">
+            View Details
+          </router-link>
         </div>
       </div>
-    </section>
-
-    <!-- Branches Section -->
-    <section class="py-12 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">
-          Branches
-        </h2>
-        <div v-for="branch in branches" :key="branch.id" class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-700 mb-4">
-            {{ branch.name }}
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div v-for="car in cars" :key="car.id" class="bg-white shadow-md rounded-lg p-6 border"
-              :class="{ 'border-red-500': !car.stock[branch.name.toLowerCase()] }">
-              <img :src="car.image" alt="Car" class="w-full h-40 object-cover rounded-lg" />
-              <h4 class="text-lg font-bold mt-4">{{ car.model }}</h4>
-              <p class="text-gray-600 mt-2">Price: ${{ car.price }}</p>
-              <p class="text-sm mt-2" :class="car.stock[branch.name.toLowerCase()] ? 'text-green-500' : 'text-red-500'">
-                {{ car.stock[branch.name.toLowerCase()] ? 'In Stock' : 'Out of Stock' }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p v-else class="text-center text-gray-600 mt-10">No cars available in this branch.</p>
     </section>
   </div>
 </template>
 
-
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useStore } from '@/stores/store';
 
+const route = useRoute();
 const store = useStore();
 
-// Fetch data when component is mounted
-store.fetchCars();
-
-const cars = computed(() => store.cars);
-
-// Define branches
-const branches = ref([
-  { id: 1, name: 'Branch1' },
-  { id: 2, name: 'Branch2' },
-  { id: 3, name: 'Branch3' },
-]);
+const branchId = Number(route.params.id);
+const branch = computed(() => store.branches.find((b) => b.id === branchId));
+const filteredCars = computed(() => store.cars.filter((car) => car.branchId === branchId));
 </script>
-
-<style scoped>
-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-section {
-  padding: 2rem 0;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  transition: transform 0.3s ease;
-}
-</style>
