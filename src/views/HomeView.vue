@@ -83,7 +83,13 @@ const navigateTo = (item: { name: string; href: string }) => {
             >{{ item.name }}</a
           >
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end"></div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+          <router-link
+            to="/search"
+            class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+            >Search</router-link
+          >
+        </div>
       </nav>
       <!-- mobile menu -->
       <Dialog
@@ -121,7 +127,11 @@ const navigateTo = (item: { name: string; href: string }) => {
                 >
               </div>
               <div class="py-6">
-                <a href="/search">Search</a>
+                <a
+                  href="/search"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Search</a
+                >
               </div>
             </div>
           </div>
