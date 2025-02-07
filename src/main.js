@@ -1,15 +1,17 @@
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import axios from "./plugins/axios";
+import axiosInstance from "./axiosInstance";
+import App from "./App.vue";
+import router from "./router";
+import "./assets/main.css";
 
-import './assets/main.css'
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import axios from './plugins/axios'
+const app = createApp(App);
+const instance = axios.create();
 
-import App from './App.vue'
-import router from './router'
+app.use(createPinia());
+app.config.globalProperties.$axios = axiosInstance;
+app.use(router);
+app.mount("#app");
 
-const app = createApp(App)
-
-app.use(createPinia())
-app.use(axios)
-app.use(router)
-app.mount('#app')
+export default instance;
